@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {TextInput} from 'react-native';
-import {Button, CardSection, Card} from "./Common";
+import {Button, CardSection, Card, Field} from "./Common";
 
-
+// are login form is responsible for figuring what our text input state is
 
 class LoginForm extends Component{
     state = {
@@ -14,9 +13,11 @@ class LoginForm extends Component{
             <Card>
                 {/*Section 1*/}
                 <CardSection >
-                    <TextInput
+                    <Field
                         value={this.state.text}
-                        onChangeText={text =>this.setState({text})}
+                        //anytime the user types inside this field
+                        onChangeText={text =>this.setState({text})} //We want to envoke this fat arrow function
+                        //passing in onChange prop down to the Field Component
                     />
                 </CardSection>
                 {/*Section 2*/}
