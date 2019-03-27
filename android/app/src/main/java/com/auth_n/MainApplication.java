@@ -1,4 +1,4 @@
-package com.auth;
+package com.auth_n;
 
 import android.app.Application;
 

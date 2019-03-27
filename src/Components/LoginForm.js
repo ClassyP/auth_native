@@ -13,12 +13,12 @@ class LoginForm extends Component{
             <Card>
                 {/*Section 1*/}
                 <CardSection >
-                    <Field
+                    {/* <Field
                         value={this.state.text}
                         //anytime the user types inside this field
                         onChangeText={text =>this.setState({text})} //We want to envoke this fat arrow function
                         //passing in onChange prop down to the Field Component
-                    />
+                    /> */}
                 </CardSection>
                 {/*Section 2*/}
                 <CardSection />

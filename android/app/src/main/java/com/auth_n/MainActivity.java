@@ -1,4 +1,4 @@
-package com.auth;
+package com.auth_n;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "auth";
+        return "auth_n";
     }
 }

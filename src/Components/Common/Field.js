@@ -15,4 +15,10 @@ const Field = ({label, value, onChangeText}) => {
     )
 }
 
-export { Field};
+export { Field };
+
+// conts styles = {
+//     continerStyle={},
+//     inputStyle={},
+//     labelStyle={}
+// };
