@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, CardSection, Card, Field} from "./Common";
+import {Button, CardSection, Card, Input} from "./Common";
 
 // are login form is responsible for figuring what our text input state is
 
@@ -13,12 +13,11 @@ class LoginForm extends Component{
             <Card>
                 {/*Section 1*/}
                 <CardSection >
-                    {/* <Field
-                        value={this.state.text}
-                        //anytime the user types inside this field
-                        onChangeText={text =>this.setState({text})} //We want to envoke this fat arrow function
-                        //passing in onChange prop down to the Field Component
-                    /> */}
+                   <Input
+                       label={'Email:'}
+                       value={this.state.text}
+                       onChangeText={text=> this.setState({text})}
+                   />
                 </CardSection>
                 {/*Section 2*/}
                 <CardSection />
