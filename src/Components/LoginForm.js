@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Text, StyleSheet} from 'react-native';
 import {Button, CardSection, Card, Input} from "./Common";
 import firebase from 'firebase';
 // are login form is responsible for figuring what our text input state is
@@ -6,11 +7,18 @@ import firebase from 'firebase';
 class LoginForm extends Component{
     state = {
         email: '',
-        password: ''
+        password: '',
+        error:''
     }
     onButtonPress(){
         const { email, password} =this.state;
-        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password);
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password)
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .catch(() => {
+                        this.setState({error: 'Authentication Failed.'})
+                    });
+            });
     }
 
     render() {
@@ -36,6 +44,9 @@ class LoginForm extends Component{
                     />
                 </CardSection>
 
+                <Text style={styles.errorTextStyle}>
+                    {this.state.error}
+                </Text>
 
                 {/*Section 3*/}
                 <CardSection>
@@ -50,3 +61,12 @@ class LoginForm extends Component{
 }
 
 export default LoginForm;
+
+
+const styles = StyleSheet.create ({
+    errorTextStyle: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red'
+    }
+});
