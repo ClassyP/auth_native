@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet} from 'react-native';
-import {Button, CardSection, Card, Input} from "./Common";
+import {Button, CardSection, Card, Input, Spinner} from "./Common";
 import firebase from 'firebase';
 // are login form is responsible for figuring what our text input state is
 
@@ -8,12 +8,13 @@ class LoginForm extends Component{
     state = {
         email: '',
         password: '',
-        error:''
+        error:'',
+        loading: false
     }
     onButtonPress() {
         const { email, password } = this.state;
 
-        this.setState({error: ''});
+        this.setState({error: '', loading: true});
 
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password)
             .catch(() => {
@@ -22,6 +23,17 @@ class LoginForm extends Component{
                         this.setState({error: 'Authentication Failed.'})
                     });
             });
+    }
+
+    renderButton() {
+        if (this.state.loading){
+            return <Spinner size="small"/>;
+        }
+        return (
+            <Button onPress={this.onButtonPress.bind(this)}>
+                Log in
+            </Button>
+        );
     }
 
     render() {
@@ -53,9 +65,7 @@ class LoginForm extends Component{
 
                 {/*Section 3*/}
                 <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Log in
-                    </Button>
+                    {this.renderButton()}
                 </CardSection>
             </Card>
         );
