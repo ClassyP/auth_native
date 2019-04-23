@@ -1,19 +1,30 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-// import * as firebase from 'firebase';
 import { Header } from "./Components/Common"; //dont need to specify a particular file path, will default to index file
 import LoginForm from './Components/LoginForm';
+import * as firebase from 'firebase';
 
 
 class App extends Component{
+    state = {loggedIn: false}
 
-    // componentDidMount() {
-    //     const firebaseConfig ={
-    //         apiKey: 'AIzaSyCPx_-1n8rbA6keApRVFQA5E_CXBBAKjqY',
-    //         authDomain: 'auth-f2168.firebaseapp.com',
-    //     }
-    //     firebase.initializeApp(firebaseConfig)
-    // }
+
+    componentDidMount() {
+        const firebaseConfig ={
+            apiKey: 'AIzaSyCPx_-1n8rbA6keApRVFQA5E_CXBBAKjqY',
+            authDomain: 'auth-f2168.firebaseapp.com',
+        }
+        firebase.initializeApp(firebaseConfig)
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user){
+                this.setState({loggedIn: true});
+            }
+            else {
+                this.setState({loggedIn: false});
+            }
+
+        });
+    }
 
 
     render(){
