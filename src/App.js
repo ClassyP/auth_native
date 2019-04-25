@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import { Header } from "./Components/Common"; //dont need to specify a particular file path, will default to index file
+import {Button, Header} from "./Components/Common"; //dont need to specify a particular file path, will default to index file
 import LoginForm from './Components/LoginForm';
 import * as firebase from 'firebase';
 
@@ -26,12 +26,24 @@ class App extends Component{
         });
     }
 
+    renderContent() {
+        if (this.state.loggedIn){
+            return (
+                <Button>
+                    Log out
+                </Button>
+            );
+        }
+
+        return <LoginForm/>;
+    }
+
 
     render(){
         return (
           <View style={styles.container}>
               <Header headerText={"Authentication"}/>
-              <LoginForm />
+              {this.state.renderContent}
           </View>
         );
     }
