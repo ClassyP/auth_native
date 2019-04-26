@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button, Header} from "./Components/Common"; //dont need to specify a particular file path, will default to index file
+import {View, StyleSheet} from 'react-native';
+import {Button, Header, Spinner} from "./Components/Common"; //dont need to specify a particular file path, will default to index file
 import LoginForm from './Components/LoginForm';
 import * as firebase from 'firebase';
 
@@ -17,7 +17,7 @@ class App extends Component{
         firebase.initializeApp(firebaseConfig)
         firebase.auth().onAuthStateChanged((user) => {
             if (user){
-                this.setState({loggedIn: true});
+                this.setState({loggedIn: null});
             }
             else {
                 this.setState({loggedIn: false});
@@ -25,20 +25,19 @@ class App extends Component{
 
         });
     }
-
+        // refactoring renderContent to switch 
     renderContent() {
-        if (this.state.loggedIn){
-            return (
-                <Button>
-                    Log out
-                </Button>
-            );
+        switch (this.state.loggedIn) {
+            case true:
+                return  <Button> Log out </Button>;
+            case false: return <LoginForm/>;
+            default:
+            return <Spinner size="large"/>
         }
 
-        return <LoginForm/>;
     }
 
-
+    
     render(){
         return (
           <View style={styles.container}>
